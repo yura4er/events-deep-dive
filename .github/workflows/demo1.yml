@@ -3,7 +3,18 @@ on:
   pull_request:
     types:
       - opened
+    branches-ignore:
+      - dev
   workflow_dispatch:
+  push:
+    branches:
+      - main # matches 'main' branch
+      - 'dev-*' # matches 'dev-1', 'dev-feature', etc.
+      - 'feat/**' # matches 'feat/xyz', 'feat/abc/123', etc.
+    paths-ignore:
+      - 'docs/**' # ignores changes in 'docs' folder
+      - '*.md' # ignores changes in any markdown files
+      - '.gitignore' # ignores changes to .gitignore file
 jobs:
   deploy:
     runs-on: ubuntu-latest
